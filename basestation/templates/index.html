@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>UB Smart Park</title>
+        <link rel="stylesheet" href="static/styles.css">
+	    <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
+    </head>
+
+    <body>
+        <img src="static/ub_parking_logo.png"></img>
+        <h1>UB Smart Park</h1>
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'North')" id="defaultOpen">North Campus</button>
+            <button class="tablinks" onclick="openTab(event, 'South')">South Campus</button>
+        </div>
+        <div id="North" class="tabcontent">
+            <h2>North Campus</h2>
+            <div id="northcampus"></div>
+            <script src="{{url_for('static', filename='northcampus.js')}}"></script>
+        </div>
+        <div id="South" class="tabcontent">
+            <h2>South Campus</h2>
+            <div id="southcampus"></div>
+            <script src="{{url_for('static', filename='southcampus.js')}}"></script>
+        </div>
+        <script>
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            document.getElementById("defaultOpen").click();
+        </script>
+    </body>
+</html>
