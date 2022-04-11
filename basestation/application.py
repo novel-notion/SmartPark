@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, send_from_directory
 import json
 import sqlite3
+from database import process_tag
 application = Flask(__name__)
 
 @application.route('/')
@@ -14,13 +15,15 @@ def northcampus():
 @application.route('/southcampus.js')
 def southcampus():
    return render_template("static/southcampus.js")
+   
 @application.route('/rfid_reader')
 def give_rfid_file():
     return send_from_directory("static","rfid_reader.py")
+
 @application.route('/get_rfid', methods = ['POST'])
 def recieve_scan():
-
     response = request.form.to_dict()
+    process_tag(str(repsonse.values()))
     # response is a dicionary {LotID:TagID} 
     return ("RFID Scan Recieved")
 

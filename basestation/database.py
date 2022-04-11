@@ -20,19 +20,3 @@ def process_tag(tag):
         cur.execute("DELETE FROM ketter WHERE tag=?", (tag,))
     con.commit()
     con.close()
-
-con = sqlite3.connect("smartpark.db")
-cur = con.cursor()
-cur.execute("SELECT * FROM ketter")
-results = cur.fetchall()
-for i in results:
-    print("run 1:", i)
-process_tag(696969696)
-results = cur.fetchall()
-for i in results:
-    print("run 2:", i)
-process_tag(4503)
-results = cur.fetchall()
-for i in results:
-    print("run 2:", i)
-con.close()
