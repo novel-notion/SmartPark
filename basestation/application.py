@@ -23,7 +23,7 @@ def give_rfid_file():
 @application.route('/get_rfid', methods = ['POST'])
 def recieve_scan():
     response = request.form.to_dict()
-    process_tag(str(repsonse.values()))
+    process_tag(str(response.values()))
     # response is a dicionary {LotID:TagID} 
     return ("RFID Scan Recieved")
 
