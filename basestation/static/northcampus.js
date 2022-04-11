@@ -3,7 +3,7 @@ Plotly.setPlotConfig({mapboxAccessToken: 'pk.eyJ1IjoiZGpwYXJkbyIsImEiOiJjbDE0YmZ
 var lots = {'Fargo'         : [43.006405, -78.787122],
             'Governors B'   : [43.002356, -78.792486],
             'Governors C'   : [43.003768, -78.790362],
-            'Governors D' 	: [43.003863, -78.791993],
+            'Governors D'   : [43.003863, -78.791993],
             'Governors E'   : [43.003737, -78.794096],
             'Red Jacket'    : [43.008586, -78.787572],
             'Richmond B'    : [43.009935, -78.788002],
