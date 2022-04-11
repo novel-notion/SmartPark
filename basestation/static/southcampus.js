@@ -67,7 +67,7 @@ var layout = {
   margin : {
     autoexpand : false,
   },
-  autosize : false,
+  autosize : true,
   width : 1000,
   height : 800,
   mapbox: {
