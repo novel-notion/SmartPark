@@ -7,30 +7,29 @@
     </head>
 
     <body>
-	<div id="header" >
-		<div id="logo">
-		    <img src="static/ub_parking_logo.png"></img>
-	    	</div>
-		<div id="header-title">
-		    <h1>UB Smart Park</h1>
-	    	</div>
-	</div>
-
+        <div id="header" >
+            <div id="logo">
+                <img src="static/ub_parking_logo.png"></img>
+                </div>
+            <div id="header-title">
+                <h1>UB Smart Park</h1>
+                </div>
+        </div>
 
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'North')" id="defaultOpen">North Campus</button>
             <button class="tablinks" onclick="openTab(event, 'South')">South Campus</button>
         </div>
+
         <div id="North" class="tabcontent">
-            <h2>North Campus</h2>
             <div id="northcampus"></div>
             <script src="{{url_for('static', filename='northcampus.js')}}"></script>
         </div>
         <div id="South" class="tabcontent">
-            <h2>South Campus</h2>
             <div id="southcampus"></div>
             <script src="{{url_for('static', filename='southcampus.js')}}"></script>
         </div>
+
         <script>
             function openTab(evt, tabName) {
                 var i, tabcontent, tablinks;
@@ -47,5 +46,6 @@
             }
             document.getElementById("defaultOpen").click();
         </script>
+        
     </body>
 </html>

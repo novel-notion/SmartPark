@@ -49,39 +49,46 @@ for (let key in lots) {
 var center_lat = (Math.min(...latitudes) + Math.max(...latitudes))/2;
 var center_lon = (Math.min(...longitudes) + Math.max(...longitudes))/2;
 
+var capacity = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50];
+
 var data = [{
   type: 'scattermapbox',
   mode: 'markers',
-  text: lotnames,
   lon: longitudes,
   lat: latitudes,
-  hoverinfo: 'text',
-  //hovertemplate: ,
   marker: {
     size: 15,
     symbol: 'circle',   //won't accept anything else?
     opacity: .9,
-    color: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50],
+    color: capacity,
     cmin: 0,
     cmax: 100,
     colorscale: 'Rainbow',  //also 'Rainbow', 'Jet', 'Portland', '[[0, 'rgb(0,0,0)'], [1, 'rgb(255,255,255)']]'
     autocolorscale: false,
     colorbar: {
-      title: 'Capacity',
+      title: {
+        text : 'Capacity',
+        side : 'top'
+      },
       ticksuffix: '%',
       tickfont: {
         size: 11
       },
       nticks: 10,
       tickmode: 'auto',
-      showticksuffix: 'all'
+      //ticklabelposition: "outside left",
+     //ticks : "outside",
+      showticksuffix: 'all',
+      xanchor : "right",
+      xpad : 20,
     },
   },
-  name: 'UB North Campus Lots',
+  hovertemplate: '<b>%{text}</b><br>' + '<i>Capacity</i>: %{marker.color}%', 
+  text : lotnames,
+  name : ''
 }];
 
 var layout = {
-  //title: 'UB North Campus Lots',
   font: {
     family: 'Droid Serif, serif',
     size: 6
@@ -89,9 +96,10 @@ var layout = {
   titlefont: {
     size: 16
   },
-  margin : {
-    autoexpand : false,
-  },
+  // margin : {
+  //   autoexpand : false,
+  // },
+  automargin : true,
   autosize : false,
   width : 1000,
   height : 800,
@@ -105,4 +113,9 @@ var layout = {
   }
 };
 
-Plotly.newPlot("northcampus", data, layout);
+var config = {
+  responsive: true,
+  displayModeBar: false
+};
+
+Plotly.newPlot("northcampus", data, layout, config);
