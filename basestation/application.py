@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, send_file
 import json
 import sqlite3
-from database import process_tag
+from database import process_tag, update_site
 application = Flask(__name__)
 
 @application.route('/')
@@ -18,7 +18,11 @@ def southcampus():
    
 @application.route('/rfid_reader')
 def give_rfid_file():
-    return send_from_directory("static","rfid_reader.py")
+   return send_from_directory("static","rfid_reader.py")
+
+@application.route('/database')
+def push_update():
+   return update_site()
 
 @application.route('/get_rfid', methods = ['POST'])
 def recieve_scan():

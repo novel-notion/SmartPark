@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 con = sqlite3.connect("smartpark.db")
 cur = con.cursor()
@@ -8,6 +9,8 @@ cur.execute("CREATE TABLE IF NOT EXISTS ketter (tag)")
 #...
 con.commit()
 con.close()
+
+capacity_array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 10, 20, 30, 40, 50]
 
 def process_tag(response):
     lotID = list(response.keys())[0]
@@ -26,4 +29,8 @@ def process_tag(response):
         capacity = capacity - 1
     con.commit()
     con.close()
-    return capacity
+    capacity_array[33] = capacity/3*100
+    return
+
+def update_site():
+    return json.dumps(capacity_array)
