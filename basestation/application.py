@@ -22,6 +22,7 @@ def give_rfid_file():
 
 @application.route('/database')
 def push_update():
+   #process_tag({'ketter': 6969})
    return update_site()
 
 @application.route('/get_rfid', methods = ['POST'])

@@ -80,4 +80,9 @@ var layout = {
   }
 };
 
-Plotly.newPlot("southcampus", data, layout);
+// var config = {
+//   responsive: true,
+//   displayModeBar: false
+// };
+
+Plotly.newPlot("southcampus", data, layout);//, config);
