@@ -4,6 +4,8 @@
         <title>UB Smart Park</title>
         <link rel="stylesheet" href="static/styles.css">
 	    <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
+        <!-- <meta http-equiv="refresh" content="30"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body onload="loadNorthCampus();">
@@ -18,7 +20,7 @@
 
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'North')" id="defaultOpen">North Campus</button>
-            <button class="tablinks" onclick="openTab(event, 'South')">South Campus</button>
+            <button class="tablinks" onclick="openTab(event, 'South'); loadSouthCampus();">South Campus</button>
         </div>
 
         <div id="North" class="tabcontent">
@@ -43,7 +45,7 @@
                 }
                 document.getElementById(tabName).style.display = "block";
                 evt.currentTarget.className += " active";
-            }
+            };
             document.getElementById("defaultOpen").click();
         </script>
         

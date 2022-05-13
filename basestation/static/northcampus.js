@@ -1,9 +1,9 @@
 function loadNorthCampus(){
 
   Plotly.setPlotConfig({mapboxAccessToken: 'pk.eyJ1IjoiZGpwYXJkbyIsImEiOiJjbDE0YmZlcDUwaHVjM2pvZGprenlqZnMzIn0.au05Z1P0yFZ6FeDhEc-A4A'});
-  
+
   mapWidth = document.documentElement.clientWidth;
-  mapHeight = document.documentElement.clientHeight - document.getElementById("header").offsetHeight - document.getElementById("defaultOpen").clientHeight - 2;
+  mapHeight = 1/2*(document.documentElement.clientHeight - document.getElementById("header").offsetHeight - document.getElementById("defaultOpen").clientHeight - 2);
   // window.addEventListener('resize', (event) => {
   //   mapWidth = document.documentElement.clientWidth;
   //   mapHeight = document.documentElement.clientHeight - document.getElementById("header").offsetHeight - document.getElementById("defaultOpen").clientHeight;
@@ -48,8 +48,8 @@ function getMapParams(capacity_array, mapWidth, mapHeight){
               'Special Events': [42.997648, -78.784418],
               'Stadium' 	    : [42.997821, -78.779655],
               'Furnas<br>(Faculty/Staff)' 	      : [43.00245, -78.786328],
-              'Governors A<br>(Faculty/Staff)' 	: [43.00234, -78.790877],
-              'Hochstetter A<br>(Faculty/Staff)' : [42.998809, -78.791585],
+              'Governors A<br>(Faculty/Staff)' 	  : [43.00234, -78.790877],
+              'Hochstetter A<br>(Faculty/Staff)'  : [42.998809, -78.791585],
               'Jacobs A<br>(Faculty/Staff)' 	    : [42.998511, -78.788302],
               'Cooke A'     	: [42.999437, -78.793216],
               'Cooke B' 	    : [42.998715, -78.793237],
@@ -82,8 +82,8 @@ function getMapParams(capacity_array, mapWidth, mapHeight){
     lon: longitudes,
     lat: latitudes,
     marker: {
-      size: 18,
-      sizemin: 10,
+      size: 14,
+      sizemin: 18,
       symbol: 'circle',
       opacity: .9,
       color: capacity_percentages,
@@ -94,17 +94,21 @@ function getMapParams(capacity_array, mapWidth, mapHeight){
       colorbar: {
         title: {
           text : 'Capacity',
-          side : 'top'
+          side : 'top',
+          font : {
+            size: 18
+          },
         },
+        bgcolor : 'white',
         ticksuffix: '%',
         tickfont: {
-          size: 12
+          size: 16
         },
         nticks: 10,
         tickmode: 'auto',
         showticksuffix: 'all',
         xanchor : "right",
-        xpad : 20,
+        xpad : 10,
       },
     },
     text: lotnames,
@@ -117,7 +121,7 @@ function getMapParams(capacity_array, mapWidth, mapHeight){
   var layout = {
     font: {
       family: 'Droid Serif, serif',
-      size: 6
+      size: 10
     },
     titlefont: {
       size: 16
@@ -129,21 +133,26 @@ function getMapParams(capacity_array, mapWidth, mapHeight){
       r: 0,
       b: 0
     },
-    width : mapWidth,
-    height : mapHeight,
+    // width : mapWidth,
+    // height : mapHeight,
+    autosize : true,
+    uniformtext : {
+      minsize : 10
+    },
     mapbox: {
       center: {
         lat : center_lat,
-        lon : center_lon
+        lon : center_lon + .004
       },
       style: 'outdoors',    //'satellite-streets'
-      zoom: 14
+      zoom: 13,
     }
   };
 
   var config = {
     responsive: true,
-    displayModeBar: false
+    displayModeBar: false,
+    //scrollZoom : false
   };
 
   return {'data': data, 'layout':layout, 'config':config, 'lots':lots};
