@@ -1,14 +1,15 @@
 function loadSouthCampus(){
   Plotly.setPlotConfig({mapboxAccessToken: 'pk.eyJ1IjoiZGpwYXJkbyIsImEiOiJjbDE0YmZlcDUwaHVjM2pvZGprenlqZnMzIn0.au05Z1P0yFZ6FeDhEc-A4A'});
   
-  mapWidth = document.documentElement.clientWidth;
-  mapHeight = 1/2*(document.documentElement.clientHeight - document.getElementById("header").offsetHeight - document.getElementById("defaultOpen").clientHeight - 2);
+  var vw = .01*document.documentElement.clientWidth;
+  var vh = .01*(document.documentElement.clientHeight - document.getElementById("header").offsetHeight - document.getElementById("defaultOpen").clientHeight);
+  
   var capacity_array = capacity_array = [[10, 100], [20, 100], [30, 100], [40,100], [50,100], [60,100], [70,100], [80,100], [90,100], [10,100], [10,100]];
-  params = getSouthMapParams(capacity_array, mapWidth, mapHeight);
+  params = getSouthMapParams(capacity_array, vw, vh);
   Plotly.newPlot("southcampus", params.data, params.layout, params.config);
 } 
 
-function getSouthMapParams(capacity_array, mapWidth, mapHeight){
+function getSouthMapParams(capacity_array, vw, vh){
   var lots = {'Main/Bailey'                       : [42.95775, -78.816411],
               'Parker'                            : [42.950376, -78.821787],
               'Abbott B<br>(Faculty/Staff)'       :	[42.955165, -78.819126],
@@ -53,7 +54,7 @@ function getSouthMapParams(capacity_array, mapWidth, mapHeight){
       cmin: 0,
       cmax: 100,
       autocolorscale: false,
-      colorscale: 'Rainbow',  //also 'Rainbow', 'Jet', 'Portland', "[[0, 'rgb(0,0,0)'], [1, 'rgb(255,255,255)']]"
+      colorscale: 'Rainbow',
       colorbar: {
         title: {
           text : 'Capacity',
@@ -71,7 +72,7 @@ function getSouthMapParams(capacity_array, mapWidth, mapHeight){
         tickmode: 'auto',
         showticksuffix: 'all',
         xanchor : "right",
-        xpad : 10,
+        xpad : 3*vw,
       },
     },
     text: lotnames,
@@ -96,8 +97,7 @@ function getSouthMapParams(capacity_array, mapWidth, mapHeight){
       r: 0,
       b: 0
     },
-    //width : mapWidth,
-    //height : mapHeight,
+    height : 98*vh,
     autosize : true,
     uniformtext : {
       minsize : 10

@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, send_from_directory, send_file
 import json
 import sqlite3
-from database import process_tag, update_site
+from database import process_tag, current_data
+
 application = Flask(__name__)
 
 @application.route('/')
@@ -22,9 +23,8 @@ def give_rfid_file():
 
 @application.route('/database')
 def push_update():
-   #process_tag({'ketter': 6969})
-   return update_site()
-
+   return current_data()
+      
 @application.route('/get_rfid', methods = ['POST'])
 def recieve_scan():
     response = request.form.to_dict()
@@ -33,4 +33,4 @@ def recieve_scan():
     return ("RFID Scan Recieved")
 
 if __name__ == '__main__':
-   application.run(host='0.0.0.0', port=8080)
+   application.run(host='0.0.0.0', port=8080, threaded=True)

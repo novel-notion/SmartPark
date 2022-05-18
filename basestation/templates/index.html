@@ -4,7 +4,6 @@
         <title>UB Smart Park</title>
         <link rel="stylesheet" href="static/styles.css">
 	    <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
-        <!-- <meta http-equiv="refresh" content="30"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
@@ -17,19 +16,21 @@
                 <h1>UB Smart Park</h1>
                 </div>
         </div>
-
+        
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'North')" id="defaultOpen">North Campus</button>
             <button class="tablinks" onclick="openTab(event, 'South'); loadSouthCampus();">South Campus</button>
         </div>
 
-        <div id="North" class="tabcontent">
-            <div id="northcampus"></div>
-            <script src="{{url_for('static', filename='northcampus.js')}}"></script>
-        </div>
-        <div id="South" class="tabcontent">
-            <div id="southcampus"></div>
-            <script src="{{url_for('static', filename='southcampus.js')}}"></script>
+        <div class="flex-container">
+            <div id="North" class="tabcontent">
+                <div id="northcampus"></div>
+                <script src="{{url_for('static', filename='northcampus.js')}}"></script>
+            </div>
+            <div id="South" class="tabcontent">
+                <div id="southcampus"></div>
+                <script src="{{url_for('static', filename='southcampus.js')}}"></script>
+            </div>
         </div>
 
         <script>

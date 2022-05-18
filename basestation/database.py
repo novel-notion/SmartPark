@@ -41,5 +41,5 @@ def process_tag(response):
     capacity_array[0][0] = capacity
     return
 
-def update_site():
+def current_data():
     return json.dumps(capacity_array)

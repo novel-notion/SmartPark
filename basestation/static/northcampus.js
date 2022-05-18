@@ -1,28 +1,48 @@
 function loadNorthCampus(){
 
   Plotly.setPlotConfig({mapboxAccessToken: 'pk.eyJ1IjoiZGpwYXJkbyIsImEiOiJjbDE0YmZlcDUwaHVjM2pvZGprenlqZnMzIn0.au05Z1P0yFZ6FeDhEc-A4A'});
-
-  mapWidth = document.documentElement.clientWidth;
-  mapHeight = 1/2*(document.documentElement.clientHeight - document.getElementById("header").offsetHeight - document.getElementById("defaultOpen").clientHeight - 2);
-  // window.addEventListener('resize', (event) => {
-  //   mapWidth = document.documentElement.clientWidth;
-  //   mapHeight = document.documentElement.clientHeight - document.getElementById("header").offsetHeight - document.getElementById("defaultOpen").clientHeight;
-  // });
-
+  
+  var vw = .01*document.documentElement.clientWidth;
+  var vh = .01*(document.documentElement.clientHeight - document.getElementById("header").offsetHeight - document.getElementById("defaultOpen").clientHeight);
+  
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function(){
     if (this.readyState === 4 && this.status === 200){
       capacity_array = JSON.parse(this.response);
-      params = getMapParams(capacity_array, mapWidth, mapHeight);
+      params = getNorthMapParams(capacity_array, vw, vh);
       Plotly.newPlot("northcampus", params.data, params.layout, params.config);
     }
   };
   xhttp.open("GET", "/database");
   xhttp.send();
-}
+};
 
-function getMapParams(capacity_array, mapWidth, mapHeight){
+function updateNorthCampus(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function(){
+    if (this.readyState === 4 && this.status === 200){
 
+      var capacity_array = JSON.parse(this.response);
+      var capacity_percentages = []
+      for (i=0; i<capacity_array.length; i++){
+        capacity_percentages[i] = Math.round(capacity_array[i][0]/capacity_array[i][1]*100);
+      }; 
+      
+      var update = {
+        'marker.color': [capacity_percentages],
+        customdata : [capacity_array]
+      }
+
+      Plotly.restyle("northcampus", update, [0]);
+    };
+  };
+  xhttp.open("GET", "/database");
+  xhttp.send();
+};
+
+setInterval(updateNorthCampus, 1000);
+
+function getNorthMapParams(capacity_array, vw, vh){
   var lots = {'Ketter' 	      : [43.002466, -78.788838],
               'Fargo'         : [43.006405, -78.787122],
               'Governors B'   : [43.002356, -78.792486],
@@ -90,7 +110,7 @@ function getMapParams(capacity_array, mapWidth, mapHeight){
       cmin: 0,
       cmax: 100,
       autocolorscale: false,
-      colorscale: 'Rainbow',  //also 'Rainbow', 'Jet', 'Portland', "[[0, 'rgb(0,0,0)'], [1, 'rgb(255,255,255)']]"
+      colorscale: 'Rainbow',
       colorbar: {
         title: {
           text : 'Capacity',
@@ -108,7 +128,7 @@ function getMapParams(capacity_array, mapWidth, mapHeight){
         tickmode: 'auto',
         showticksuffix: 'all',
         xanchor : "right",
-        xpad : 10,
+        xpad : 3*vw,
       },
     },
     text: lotnames,
@@ -133,11 +153,10 @@ function getMapParams(capacity_array, mapWidth, mapHeight){
       r: 0,
       b: 0
     },
-    // width : mapWidth,
-    // height : mapHeight,
+    height : 98*vh,
     autosize : true,
     uniformtext : {
-      minsize : 10
+      minsize : 8
     },
     mapbox: {
       center: {
